@@ -16,19 +16,8 @@ provider "aws" {
 
 resource "aws_s3_bucket" "b" {
   bucket = "s3-website-test-tietoevry-learn-github-exercise-2"
+  source = "index.html"
   acl    = "public-read"
-
-  website {
-    index_document = "index.html"
-    routing_rules = <<EOF
-[{
-    "Condition": {
-        "KeyPrefixEquals": "docs/"
-    },
-    "Redirect": {
-        "ReplaceKeyPrefixWith": "documents/"
-    }
-}]
-EOF
-  }
+  key = "index.html"
+  content_type = "text/html"
 }
